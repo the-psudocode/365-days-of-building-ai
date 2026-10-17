@@ -1,28 +1,26 @@
-## Day 2: My First Interactive Chatbot
+## Day 3: My First Machine Learning Model
 
-**Project:** Rule-Based AI Chatbot
+**Project:** Student Score Prediction using Linear Regression
 
 ### What I built
 
-- Created an interactive chatbot using Python.
-- Collected user input using `input()`.
-- Stored information using variables.
-- Used `if`, `elif`, and `else` to make decisions.
-- Normalized user input using `.lower()` and `.strip()`.
-- Used a `while` loop to continue the conversation.
-- Used `break` to end the conversation when the user types `bye`.
+- Created my first machine learning model using scikit-learn.
+- Trained a Linear Regression model using study hours and scores.
+- Predicted scores for new study-hour inputs.
+- Examined the learned slope and intercept.
+- Compared predictions with the training data.
 
 ### What I learned
 
-- Python variables and strings
-- User input and output
-- Conditional statements
-- Loops and program flow
-- Basic chatbot logic
-- Git commits and pushing code to GitHub
+- Machine learning fundamentals
+- Training data and model fitting
+- Linear Regression
+- Making predictions
+- Slope, intercept, and the equation of a line
+- Basic Git and GitHub workflow
 
 ### Project file
 
-- `day02_first_chatbot.py`
+- `day03_first_ml_model.py`
 
 **Status:** Completed ✅
