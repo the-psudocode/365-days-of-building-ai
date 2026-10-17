@@ -1,24 +1,28 @@
-# 365 Days of Building AI
+## Day 2: My First Interactive Chatbot
 
-Welcome to my 365 Days of Building AI challenge!
+**Project:** Rule-Based AI Chatbot
 
-## About This Challenge
-I am learning Python, Artificial Intelligence, and Generative AI by building projects every day.
+### What I built
 
-## Day 1: Hello AI
-- Created my first Python program.
-- Learned how to use the `print()` function.
-- Ran a Python file from the terminal.
-- Practiced Git and GitHub basics.
-- Uploaded my code to GitHub.
+- Created an interactive chatbot using Python.
+- Collected user input using `input()`.
+- Stored information using variables.
+- Used `if`, `elif`, and `else` to make decisions.
+- Normalized user input using `.lower()` and `.strip()`.
+- Used a `while` loop to continue the conversation.
+- Used `break` to end the conversation when the user types `bye`.
 
-## Technologies
-- Python
-- Git
-- GitHub
-- VS Code
+### What I learned
 
-## Goal
-Build my programming skills step by step and develop a portfolio of AI projects over 365 days.
+- Python variables and strings
+- User input and output
+- Conditional statements
+- Loops and program flow
+- Basic chatbot logic
+- Git commits and pushing code to GitHub
 
-**Day 1 completed! 🚀**
+### Project file
+
+- `day02_first_chatbot.py`
+
+**Status:** Completed ✅
