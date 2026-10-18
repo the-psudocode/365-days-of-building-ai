@@ -1,26 +1,25 @@
-## Day 3: My First Machine Learning Model
+## Day 4: Interactive Student Score Predictor
 
-**Project:** Student Score Prediction using Linear Regression
+**Project:** Interactive Machine Learning Application
 
 ### What I built
 
-- Created my first machine learning model using scikit-learn.
-- Trained a Linear Regression model using study hours and scores.
-- Predicted scores for new study-hour inputs.
-- Examined the learned slope and intercept.
-- Compared predictions with the training data.
+- Created an interactive student score prediction program.
+- Used a trained Linear Regression model.
+- Accepted study hours as user input.
+- Converted user input into a numerical value using `float()`.
+- Predicted student scores dynamically using `model.predict()`.
 
 ### What I learned
 
-- Machine learning fundamentals
-- Training data and model fitting
-- Linear Regression
-- Making predictions
-- Slope, intercept, and the equation of a line
-- Basic Git and GitHub workflow
+- Taking user input in Python
+- Converting strings to numbers
+- Using a trained ML model in an application
+- Making predictions from user-provided data
+- Improving the user experience with clear output messages
 
 ### Project file
 
-- `day03_first_ml_model.py`
+- `day04_interactive_predictor.py`
 
 **Status:** Completed ✅
