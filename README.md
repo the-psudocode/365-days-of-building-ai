@@ -1,23 +1,31 @@
-# Day 08 — Classification using Logistic Regression
+# Day 09 — Evaluating a Classification Model
 
 ## Project: Student Pass/Fail Prediction
 
-As part of our 365 Days of Building AI journey, we explored Classification, one of the important concepts in Machine Learning.
+On Day 09 of our 365 Days of Building AI journey, we explored how to evaluate a Classification Machine Learning model.
 
 ### What We Learned
 
-- Difference between Regression and Classification
-- Introduction to Logistic Regression
-- Training a classification model using scikit-learn
-- Predicting categories using a trained model
-- Understanding prediction probabilities
-- Testing a model with multiple inputs
+- Training data vs testing data
+- Train-test split using scikit-learn
+- Accuracy score
+- Confusion Matrix
+- Actual results vs predicted results
+- Evaluating model performance
 
 ### Project Description
 
-We built a simple Machine Learning model that predicts whether a student is likely to pass or fail based on the number of study hours.
+We built a Student Pass/Fail Prediction model using Logistic Regression.
 
-The model was trained using sample study hours and student results. We then tested it with new inputs to observe how the predictions and probabilities change.
+We split the data into training and testing sets, trained the model using the training data, and evaluated its predictions using the test data.
+
+### Evaluation Results
+
+- Accuracy: 100%
+- Correct predictions: 2 out of 2 test samples
+- Confusion Matrix: [[1, 0], [0, 1]]
+
+The model correctly predicted both test samples. However, the test set was very small, so these results do not establish how well the model would perform on real-world data.
 
 ### Technologies Used
 
@@ -28,12 +36,8 @@ The model was trained using sample study hours and student results. We then test
 
 ### Key Takeaway
 
-Regression predicts numerical values, while Classification predicts categories.
+Evaluating a Machine Learning model is important to understand how well it performs on unseen data.
 
-This project helped us understand how Machine Learning models can learn from labeled examples and predict the class of new data.
+Accuracy and the Confusion Matrix help us compare actual results with predicted results.
 
-### What's Next?
-
-Continue exploring Machine Learning and gradually move toward more realistic AI projects.
-
-#365DaysOfBuildingAI #MachineLearning #Python #AI #Classification #LogisticRegression #LearningInPublic
+#365DaysOfBuildingAI #MachineLearning #Python #AI #Classification #ModelEvaluation #LearningInPublic
