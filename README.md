@@ -1,43 +1,41 @@
-# Day 09 — Evaluating a Classification Model
+# Day 10 — Decision Tree Classification
 
 ## Project: Student Pass/Fail Prediction
 
-On Day 09 of our 365 Days of Building AI journey, we explored how to evaluate a Classification Machine Learning model.
+On Day 10 of our 365 Days of Building AI journey, we explored Decision Tree Classification, another important Machine Learning algorithm.
 
 ### What We Learned
 
-- Training data vs testing data
-- Train-test split using scikit-learn
-- Accuracy score
-- Confusion Matrix
-- Actual results vs predicted results
-- Evaluating model performance
+- Introduction to Decision Trees
+- How Decision Tree Classification works
+- Training a model using scikit-learn
+- Predicting categories using a trained model
+- Understanding decision nodes and branches
+- Visualizing a Decision Tree using Matplotlib
 
 ### Project Description
 
-We built a Student Pass/Fail Prediction model using Logistic Regression.
+We built a Student Pass/Fail Prediction model using Decision Tree Classification.
 
-We split the data into training and testing sets, trained the model using the training data, and evaluated its predictions using the test data.
+The model was trained using sample student study hours and their results. We then tested it with a new input to predict whether a student would pass or fail.
 
-### Evaluation Results
-
-- Accuracy: 100%
-- Correct predictions: 2 out of 2 test samples
-- Confusion Matrix: [[1, 0], [0, 1]]
-
-The model correctly predicted both test samples. However, the test set was very small, so these results do not establish how well the model would perform on real-world data.
+We also visualized the decision tree to understand how the model makes decisions.
 
 ### Technologies Used
 
 - Python
 - scikit-learn
-- Logistic Regression
+- Matplotlib
 - Git and GitHub
 
 ### Key Takeaway
 
-Evaluating a Machine Learning model is important to understand how well it performs on unseen data.
+A Decision Tree is a supervised Machine Learning algorithm that makes predictions by learning decision rules from training data.
 
-Accuracy and the Confusion Matrix help us compare actual results with predicted results.
+Unlike Logistic Regression, which uses a mathematical function, a Decision Tree makes decisions through a sequence of conditions and branches.
 
-#365DaysOfBuildingAI #MachineLearning #Python #AI #Classification #ModelEvaluation #LearningInPublic
+### What's Next?
+
+Continue exploring Machine Learning algorithms and learn how to build more effective predictive models.
+
+#365DaysOfBuildingAI #MachineLearning #Python #AI #DecisionTree #LearningInPublic
