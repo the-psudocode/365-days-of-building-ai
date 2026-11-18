@@ -73,6 +73,9 @@ with st.sidebar:
     if st.button("🤖 AI Prediction", use_container_width=True):
         st.session_state.page = "AI Prediction"
 
+    if st.button("📜 Prediction History", use_container_width=True):
+        st.session_state.page = "Prediction History"
+
     st.divider()
 
     st.info("Project 01 | Day 17 of 365")
@@ -84,11 +87,15 @@ with st.sidebar:
 
 page = st.session_state.get("page", "Dashboard")
 
+# Initialize prediction history
+if "prediction_history" not in st.session_state:
+    st.session_state.prediction_history = []
 
 # ----------------------------------
 # 6. Student Analysis Page
 # ----------------------------------
 
+# Student Analysis Page
 if page == "Student Analysis":
 
     st.title("📊 Student Analysis")
@@ -96,6 +103,54 @@ if page == "Student Analysis":
     st.info(
         "Student analysis features will be developed here."
     )
+
+
+# Prediction History Page
+elif page == "Prediction History":
+
+    st.title("📜 Prediction History")
+
+    st.write(
+        "View all student performance predictions made during this session."
+    )
+
+    st.divider()
+
+    if st.session_state.prediction_history:
+
+        history_df = pd.DataFrame(
+            st.session_state.prediction_history
+        )
+
+        st.subheader("Saved Predictions")
+
+        st.dataframe(
+            history_df,
+            use_container_width=True,
+            hide_index=True
+        )
+
+        st.metric(
+            "Total Predictions",
+            len(history_df)
+        )
+
+        if st.button("🗑️ Clear Prediction History"):
+
+            st.session_state.prediction_history = []
+
+            st.success("Prediction history cleared!")
+
+            st.rerun()
+
+    else:
+
+        st.info(
+            "No prediction history available. "
+            "Make a prediction to see it here."
+        )
+
+    
 
 
 # ----------------------------------
@@ -197,6 +252,22 @@ elif page == "AI Prediction":
                 0.0,
                 min(100.0, predicted_score)
             )
+
+            # Save prediction to history
+            from datetime import datetime
+
+            prediction_record = {
+            "Student Name": student_name,
+            "Study Hours": study_hours,
+            "Attendance": attendance,
+            "Previous Score": previous_score,
+            "Sleep Hours": sleep_hours,
+            "Assignment Completion": assignment_completion,
+            "Predicted Score": round(predicted_score, 2),
+            "Date": datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+}
+
+            st.session_state.prediction_history.append(prediction_record)
 
             # Display result
             st.success("Prediction completed successfully!")
