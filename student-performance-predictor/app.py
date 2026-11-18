@@ -2,6 +2,7 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # ----------------------------------
 # 1. Page Configuration
@@ -19,6 +20,8 @@ st.set_page_config(
 
 with open("models/student_performance_model.pkl", "rb") as file:
     model = pickle.load(file)
+# Load student dataset
+df = pd.read_csv("data/student_data.csv")
 
 # ----------------------------------
 # 3. Custom CSS
@@ -96,14 +99,171 @@ if "prediction_history" not in st.session_state:
 # ----------------------------------
 
 # Student Analysis Page
+# Student Analysis Page
 if page == "Student Analysis":
 
-    st.title("📊 Student Analysis")
+    st.title("📊 Student Analysis Dashboard")
 
-    st.info(
-        "Student analysis features will be developed here."
+    st.write(
+        "Explore student academic performance through data analytics."
     )
 
+    st.divider()
+
+    # Calculate dashboard metrics
+    total_students = len(df)
+
+    average_score = df["final_score"].mean()
+
+    average_study_hours = df["study_hours"].mean()
+
+    average_attendance = df["attendance"].mean()
+
+    # Display metrics
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(
+            "Total Students",
+            total_students
+        )
+
+    with col2:
+        st.metric(
+            "Average Score",
+            f"{average_score:.2f}"
+        )
+
+    with col3:
+        st.metric(
+            "Average Study Hours",
+            f"{average_study_hours:.2f}"
+        )
+
+    with col4:
+        st.metric(
+            "Average Attendance",
+            f"{average_attendance:.2f}%"
+        )
+        st.divider()
+
+    st.subheader("📈 Study Hours vs Final Score")
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+
+    ax.scatter(
+        df["study_hours"],
+        df["final_score"]
+    )
+
+    ax.set_xlabel("Daily Study Hours")
+    ax.set_ylabel("Final Score")
+
+    ax.set_title("Relationship Between Study Hours and Final Score")
+
+    ax.grid(True)
+
+    st.pyplot(fig)
+
+    plt.close(fig)
+
+    st.divider()
+
+    st.subheader("📊 Attendance vs Final Score")
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+
+    ax.scatter(
+        df["attendance"],
+        df["final_score"]
+    )
+
+    ax.set_xlabel("Attendance (%)")
+    ax.set_ylabel("Final Score")
+
+    ax.set_title("Relationship Between Attendance and Final Score")
+
+    ax.grid(True)
+
+    st.pyplot(fig)
+
+    plt.close(fig)
+
+    st.divider()
+
+    st.subheader("📊 Final Score Distribution")
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+
+    ax.hist(
+        df["final_score"],
+        bins=8,
+        edgecolor="black"
+    )
+
+    ax.set_xlabel("Final Score")
+    ax.set_ylabel("Number of Students")
+    ax.set_title("Distribution of Student Final Scores")
+
+    ax.grid(axis="y")
+
+    st.pyplot(fig)
+
+    plt.close(fig)
+
+    st.divider()
+
+    st.subheader("💡 Student Performance Insights")
+
+    # Find highest and lowest scores
+    highest_score = df["final_score"].max()
+    lowest_score = df["final_score"].min()
+
+    # Find students with high scores
+    high_performers = len(
+        df[df["final_score"] >= 80]
+    )
+
+    # Calculate correlations
+    study_correlation = df[
+        "study_hours"
+    ].corr(df["final_score"])
+
+    attendance_correlation = df[
+        "attendance"
+    ].corr(df["final_score"])
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.info(
+            f"Highest student score: {highest_score}"
+        )
+
+        st.info(
+            f"Lowest student score: {lowest_score}"
+        )
+
+    with col2:
+        st.success(
+            f"Students scoring 80 or above: {high_performers}"
+        )
+
+        st.info(
+            f"Average score: {average_score:.2f}"
+        )
+
+    st.subheader("Feature Correlations")
+
+    st.write(
+        f"Study hours vs final score: "
+        f"{study_correlation:.2f}"
+    )
+
+    st.write(
+        f"Attendance vs final score: "
+        f"{attendance_correlation:.2f}"
+    )
 
 # Prediction History Page
 elif page == "Prediction History":
