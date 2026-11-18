@@ -3,18 +3,27 @@ import streamlit as st
 import pickle
 import pandas as pd
 
-# Page configuration
+# ----------------------------------
+# 1. Page Configuration
+# ----------------------------------
+
 st.set_page_config(
     page_title="Student Performance AI",
     page_icon="🎓",
     layout="wide"
 )
 
-# Load the trained machine learning model
+# ----------------------------------
+# 2. Load Machine Learning Model
+# ----------------------------------
+
 with open("models/student_performance_model.pkl", "rb") as file:
     model = pickle.load(file)
 
-# Custom CSS
+# ----------------------------------
+# 3. Custom CSS
+# ----------------------------------
+
 st.markdown("""
 <style>
     .stApp {
@@ -42,13 +51,17 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ----------------------------------
+# 4. Sidebar Navigation
+# ----------------------------------
 
-# Sidebar navigation
 with st.sidebar:
+
     st.title("🎓 Student AI")
     st.caption("Academic Intelligence Platform")
 
     st.divider()
+
     st.markdown("### Navigation")
 
     if st.button("🏠 Dashboard", use_container_width=True):
@@ -61,21 +74,34 @@ with st.sidebar:
         st.session_state.page = "AI Prediction"
 
     st.divider()
-    st.info("Project 01 | Day 16 of 365")
+
+    st.info("Project 01 | Day 17 of 365")
 
 
-# Page navigation
+# ----------------------------------
+# 5. Page Navigation
+# ----------------------------------
+
 page = st.session_state.get("page", "Dashboard")
 
 
-# Student Analysis Page
+# ----------------------------------
+# 6. Student Analysis Page
+# ----------------------------------
+
 if page == "Student Analysis":
 
     st.title("📊 Student Analysis")
-    st.info("Student analysis features will be developed here.")
+
+    st.info(
+        "Student analysis features will be developed here."
+    )
 
 
-# AI Prediction Page
+# ----------------------------------
+# 7. AI Prediction Page
+# ----------------------------------
+
 elif page == "AI Prediction":
 
     st.title("🤖 AI Student Performance Prediction")
@@ -88,9 +114,15 @@ elif page == "AI Prediction":
 
     st.subheader("Student Information")
 
+    # Input fields
     col1, col2 = st.columns(2)
 
     with col1:
+
+        student_name = st.text_input(
+            "Student Name",
+            placeholder="Enter student name"
+        )
 
         study_hours = st.number_input(
             "Daily Study Hours",
@@ -131,34 +163,71 @@ elif page == "AI Prediction":
 
     st.divider()
 
-    # Prediction button
+    # ----------------------------------
+    # 8. Prediction
+    # ----------------------------------
+
     if st.button(
         "🔮 Predict Student Performance",
         use_container_width=True
     ):
 
-        # Prepare student input
-        student_data = pd.DataFrame([{
-            "study_hours": study_hours,
-            "attendance": attendance,
-            "previous_score": previous_score,
-            "sleep_hours": sleep_hours,
-            "assignment_completion": assignment_completion
-        }])
+        if not student_name.strip():
 
-        # Generate prediction
-        prediction = model.predict(student_data)
+            st.warning("Please enter the student's name.")
 
-        # Display result
-        st.success("Prediction completed successfully!")
+        else:
 
-        st.metric(
-            "Predicted Final Score",
-            f"{prediction[0]:.2f} / 100"
-        )
+            # Prepare input data
+            student_data = pd.DataFrame([{
+                "study_hours": study_hours,
+                "attendance": attendance,
+                "previous_score": previous_score,
+                "sleep_hours": sleep_hours,
+                "assignment_completion": assignment_completion
+            }])
+
+            # Generate prediction
+            prediction = model.predict(student_data)
+
+            predicted_score = float(prediction[0])
+
+            # Keep displayed score within 0–100
+            score_percentage = max(
+                0.0,
+                min(100.0, predicted_score)
+            )
+
+            # Display result
+            st.success("Prediction completed successfully!")
+
+            st.subheader("Prediction Result")
+
+            st.write(f"Student: **{student_name}**")
+
+            st.metric(
+                "Predicted Final Score",
+                f"{predicted_score:.2f} / 100"
+            )
+
+            # Visual performance indicator
+            st.subheader("Performance Indicator")
+
+            st.progress(score_percentage / 100)
+
+            st.write(
+                f"Predicted score: {score_percentage:.2f}%"
+            )
+
+            st.caption(
+                "This is a model-based estimate, not a guaranteed exam result."
+            )
 
 
-# Dashboard Page
+# ----------------------------------
+# 9. Dashboard Page
+# ----------------------------------
+
 else:
 
     st.markdown(
@@ -169,4 +238,51 @@ else:
     st.markdown(
         '<div class="subtitle">Analyze academic information and predict student performance using Machine Learning.</div>',
         unsafe_allow_html=True
+    )
+
+    st.divider()
+
+    st.subheader("Welcome to Student Performance AI 🎓")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "AI Model",
+            "Connected"
+        )
+
+    with col2:
+        st.metric(
+            "Prediction System",
+            "Ready"
+        )
+
+    with col3:
+        st.metric(
+            "Project Progress",
+            "Day 17"
+        )
+
+    st.divider()
+
+    st.info(
+        "Navigate to AI Prediction to estimate a student's final score."
+    )
+
+    st.markdown(
+        """
+        ### About this application
+
+        Student Performance AI uses Machine Learning to estimate
+        student academic performance based on:
+
+        - Daily study hours
+        - Attendance percentage
+        - Previous examination score
+        - Daily sleep hours
+        - Assignment completion percentage
+
+        **Machine Learning Algorithm:** Multiple Linear Regression
+        """
     )
